@@ -245,6 +245,21 @@ static void switch_and_unload(void)
       bb_log(LOG_WARNING, "Unable to disable discrete card.");
     }
   }
+  //stephen_code:Unload the driver anyway
+  else{
+  	bb_log(LOG_INFO,"No switcher found,but unload the driver anyway!!!\n");
+
+      	/* unload the driver loaded by the graphica card */
+      	if (pci_get_driver(driver, pci_bus_id_discrete, sizeof driver)) {
+        	module_unload(driver);
+      	}	
+
+	//report if the driver unload failed!
+      	if (pci_get_driver(NULL, pci_bus_id_discrete, 0)) {
+        	bb_log(LOG_INFO, "Drivers are still loaded, unable to disable card\n");
+        	return;
+      	}
+  }
 }
 
 /**
