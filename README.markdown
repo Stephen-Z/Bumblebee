@@ -8,6 +8,20 @@ hybrid graphics chipsets. A primary goal of this project is to not only
 enable use of the discrete GPU for rendering, but also to enable
 smart power management of the dGPU when it's not in use.
 
+Custom by Stephen
+-------------------
+Fork from the origin project and add a new feature make Bumblebee can unload the nvidia driver without install any switchers(Such as bbswitch). 
+
+The reason why I am doing this is because on my laptop, the whole system can be crashed easily by invoke a simple lspci command when bbswitch turn off my discrete graphic card(GTX 1060), and according to the source code of bumblebee, it won't unload the discete card driver without switchers, So I modified it. 
+
+If you guys really want to turn off your card when it is not in use , you can just setting the power control to auto to /sys/bus/pci/devices/"you card busID"/power/control, then your card will automatically turn off when the driver is unloaded.
+I already confirm that by checking the battery current , when the card is down,the method above consuming the same energy as the bbswtich does.
+
+从原始项目分叉并添加新功能使大黄蜂可以卸载nvidia驱动程序而无需安装任何切换器（如bbswitch）。
+我这样做的原因是因为在我的笔记本电脑上，当bbswitch关闭我的独立显卡（GTX 1060）时，通过调用一个简单的lspci命令可以轻松崩溃整个系统，并且根据bumblebee的源代码，它将会没有切换器，不卸载discete卡驱动程序，所以我修改了它。
+如果你们真的想在不使用时关闭你的卡，你可以将电源控制设置为自动到 /sys/bus/pci/devices/“你卡busID”/power/control，然后你的卡将卸载驱动程序时自动关闭。
+我已经确认通过检查电池电流，当卡关闭时，上面的方法消耗与bbswtich相同的能量。
+ 
 Build Requirements
 -------------------
 
